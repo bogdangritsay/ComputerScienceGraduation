@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/styles/style.css}">
+    <title>Сайт спеціальності 122 «Комп`ютерні науки» МК СумДУ</title>
+
+</head>
+<body>
+
+
+<!--Navbar-->
+<header th:insert="blocks/header::header"></header>
+
+
+<div class="margin-3"></div>
+
+<div class="wrapper">
+
+    <div class="container">
+        <div class="container mt-5">
+            <h1>Наші викладачі</h1>
+            <hr>
+            <div class="container">
+                <div class="row justify-content-center">
+                <a th:href="'/educators-admin/add'" class="btn btn-success">Додати нового викладача</a>
+                </div>
+            </div>
+            <div class="margin-3"></div>
+            <div class="row">
+                <div th:each="el : ${teachers}" class="card mb-3" style="max-width: 540px;">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img th:src="${el.getUrlToImage().getUrl()}" class="card-img">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 th:text="${el.surname} + '  ' +  ${el.name} + '  ' + ${el.patronymic}" class="card-title">ПІБ ВИКЛАДАЧА</h5>
+                            <p th:text="${el.description}" class="card-text"></p>
+                            <p th:text="${el.getRole().getTitle()}" class="card-text"><small class="text-muted"></small></p>
+                            <div class="container">
+                                <div class="row">
+                                    <form th:action="'/educators-admin/' + ${el.getEducatorId()} + '/remove'" method="post">
+                                        <button class="btn btn-danger" type="submit">Видалити</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+
+
+<div th:insert="blocks/footer :: footer"></div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/styles/style.css}">
+    <title>Сайт спеціальності 122 «Комп`ютерні науки» МК СумДУ</title>
+
+</head>
+<body>
+
+
+<!--Navbar-->
+<header th:insert="blocks/header::header"></header>
+
+
+<div class="margin-3"></div>
+
+<div class="wrapper">
+
+    <div class="container">
+        <div class="container mt-5">
+            <h1>Сервіси дистанційного навчання</h1>
+            <hr>
+            <div class="margin-3"></div>
+            <div class="container">
+                <form action="" method="post">
+                    <select class="form-control" name="groupTitle" >
+                        <option>Оберіть групу, для якої необхідно переглянути сервіси</option>
+                        <option th:each="el : ${groups}" th:text="${el.getTitle()}">410-i</option>
+                    </select>
+                    <button class="btn btn-primary" type="submit">Переглянути</button>
+                </form>
+                <div class="margin-3"></div>
+                <hr>
+                <div class="margin-3"></div>
+
+
+
+                <div class="row">
+                    <div th:each="el : ${services}" class="card card-service" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 th:text="${el.getSubject().getTitle()}" class="card-title">Об'єктно-орієнтоване програмування</h5>
+                            <h6 th:text="${el.getEducator().getSurname()} + '  ' +  ${el.getEducator().getName()} + '  ' + ${el.getEducator().getPatronymic()}"class="card-subtitle mb-2 text-muted">Ольга Дорошкова</h6>
+                            <p th:text="${el.getDescription()}" class="card-text">Тут буде розміщено опис даного ресурсу для предмету об'єктно орієнтоване програмування</p>
+                            <a th:href="${el.getServiceUrl().getUrl()}"  class="card-link">Посилання на ресурс</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+
+
+<div th:insert="blocks/footer :: footer"></div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
+
+
+
+

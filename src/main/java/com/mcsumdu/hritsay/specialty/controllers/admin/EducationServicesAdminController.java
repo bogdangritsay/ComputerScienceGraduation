@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -29,7 +30,6 @@ public class EducationServicesAdminController {
     public String showAllServices(Model model) {
         List<Group> groups = groupPostgresDAO.getAllGroups();
         model.addAttribute("groups", groups);
-
         return "admin_pages/services-admin";
     }
 
@@ -60,48 +60,16 @@ public class EducationServicesAdminController {
                              @RequestParam int group,
                              @RequestParam String url,
                              Model model) {
+
         educationServicesPostgresDAO.addEducService(title, description, subject, url, group);
 
-        return "admin_pages/services-add-admin";
-    }
-/*
-    @PostMapping("/news-admin/add")
-    public String newsAddPost( @RequestParam String title,
-                               @RequestParam String description,
-                               @RequestParam Date date,
-                               @RequestParam String imgUrl,
-                               @RequestParam String text,
-                               Model model) {
-    *//*    News news = new News(title, description, text, date, imgUrl);
-        System.out.println(news);
-        newsConnection.addNews(news);
-*//*
-        return "redirect: /services-admin";
+        return "redirect:/services-admin";
     }
 
-
-
-    @PostMapping("/news-admin/{id}/edit")
-    public String newsUpdate(@PathVariable(value = "id") int id,
-                             @RequestParam String title,
-                             @RequestParam String description,
-                             @RequestParam Date date,
-                             @RequestParam String text,
-                             @RequestParam String imgUrl,
-                             Model model) {
-       *//* News news = newsConnection.getNewsById(id);
-        news.setTitle(title);
-        news.setDescription(description);
-        news.setDate(date);
-        news.setText(text);
-        news.setImgUrl(imgUrl);
-        newsConnection.updateNews(id, news);*//*
-        return "redirect:/news-admin";
-    }
-
-    @PostMapping("/news-admin/{id}/remove")
+    @PostMapping("/services-admin/{id}/remove")
     public String newsDelete(@PathVariable(value = "id") int id, Model model) {
-       *//* newsConnection.deleteNews(id);*//*
-        return "redirect:/news-admin";
-    }*/
+        educationServicesPostgresDAO.deleteEducService(id);
+        return "redirect:/services-admin";
+    }
+
 }

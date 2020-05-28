@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,10 +47,7 @@ public class EducationServicesPostgresDAO extends PostgresDAOConnection {
                 services.add(parseEducService(resultSet));
             }
         } catch (SQLException e) {
-            /*
-             * LOGS
-             */
-
+            System.out.println("Service: \n" + services + " was been added!");
         } finally {
             disconnect();
         }
@@ -161,6 +159,20 @@ public class EducationServicesPostgresDAO extends PostgresDAOConnection {
             statement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            disconnect();
+        }
+    }
+
+
+    public void deleteEducService(int id) {
+        connect();
+        try {
+            statement = connection.prepareStatement("DELETE FROM SERVICES WHERE SERVICE_ID = ?");
+            statement.setInt(1, id);
+            statement.executeQuery();
+        } catch (SQLException e) {
+            System.out.println("Service was been deleted from database!");
         } finally {
             disconnect();
         }

@@ -1,6 +1,7 @@
 package com.mcsumdu.hritsay.specialty.dao;
 
 import com.mcsumdu.hritsay.specialty.models.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 
@@ -11,6 +12,8 @@ import java.util.List;
 
 @Component
 public class EducationServicesPostgresDAO extends PostgresDAOConnection {
+    @Autowired
+    private UrlsPostgresDAO urlsPostgresDAO;
 
     public List<EducationService> getAllServices() {
         connect();
@@ -96,7 +99,6 @@ public class EducationServicesPostgresDAO extends PostgresDAOConnection {
         return services;
     }
 
-
     private EducationService parseEducService(ResultSet resultSet) {
         EducationService service = null;
         Subject subject;
@@ -139,4 +141,29 @@ public class EducationServicesPostgresDAO extends PostgresDAOConnection {
         }
         return service;
     }
+
+    public void addEducService(String title, String description, int subjectId, String url, int groupId) {
+        urlsPostgresDAO.addNewUrl(url, "link");
+        int urlId = urlsPostgresDAO.getUrlIdByString(url);
+        connect();
+        try {
+            statement = connection.prepareStatement(
+                    "INSERT INTO SERVICES (TITLE, DESCRIPTION, SUBJECT_ID, URL_SERVICE_ID, GROUP_ID)" +
+                            "VALUES (?, ?, ?, ?, ?)"
+            );
+
+            statement.setString(1, title);
+            statement.setString(2, description);
+            statement.setInt(3, subjectId);
+            statement.setInt(4, urlId);
+            statement.setInt(5, groupId);
+
+            statement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            disconnect();
+        }
+    }
+
 }

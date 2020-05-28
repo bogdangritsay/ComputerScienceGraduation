@@ -1,10 +1,8 @@
 package com.mcsumdu.hritsay.specialty.controllers;
 
 import java.util.List;
-import com.mcsumdu.hritsay.specialty.dao.EducationServicesPostgresDAO;
-import com.mcsumdu.hritsay.specialty.dao.EducatorsPostgresDAO;
-import com.mcsumdu.hritsay.specialty.dao.NewsPostgresDAO;
-import com.mcsumdu.hritsay.specialty.dao.StudentsPostgresDAO;
+
+import com.mcsumdu.hritsay.specialty.dao.*;
 import com.mcsumdu.hritsay.specialty.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +22,8 @@ public class MainController {
     private StudentsPostgresDAO studentsPostgresDAO;
     @Autowired
     private EducationServicesPostgresDAO educationServicesPostgresDAO;
+    @Autowired
+    private GroupPostgresDAO groupPostgresDAO;
 
     @GetMapping("/")
     public String home(Model model) {
@@ -41,16 +41,16 @@ public class MainController {
 
     @GetMapping("/students")
     public String showStudents(Model model) {
-        List<Group> groups = studentsPostgresDAO.getAllGroups();
+        List<Group> groups = groupPostgresDAO.getAllGroups();
         model.addAttribute("groups", groups);
         return "students";
     }
 
     @PostMapping("/students")
     public String showStudentsByGroup(@RequestParam String groupTitle, Model model) {
-        List<Group> groups = studentsPostgresDAO.getAllGroups();
+        List<Group> groups = groupPostgresDAO.getAllGroups();
         model.addAttribute("groups", groups);
-        Group group = studentsPostgresDAO.getGroupByTitle(groupTitle);
+        Group group = groupPostgresDAO.getGroupByTitle(groupTitle);
         List<Student> students = studentsPostgresDAO.getAllStudentsByGroup(group);
         model.addAttribute("students", students);
         return "students";
@@ -58,7 +58,7 @@ public class MainController {
 
     @GetMapping("/services")
     public String showAllServices(Model model) {
-        List<Group> groups = studentsPostgresDAO.getAllGroups();
+        List<Group> groups = groupPostgresDAO.getAllGroups();
         model.addAttribute("groups", groups);
 
         return "services";
@@ -66,11 +66,11 @@ public class MainController {
 
     @PostMapping("/services")
     public String showServicesByGroup(@RequestParam String groupTitle, Model model) {
-        List<Group> groups = studentsPostgresDAO.getAllGroups();
+        List<Group> groups = groupPostgresDAO.getAllGroups();
         model.addAttribute("groups", groups);
 
         int b = 1 + 1;
-        int groupId = studentsPostgresDAO.getGroupByTitle(groupTitle).getId();
+        int groupId = groupPostgresDAO.getGroupByTitle(groupTitle).getId();
         List<EducationService> services = educationServicesPostgresDAO.getServicesByGroupId(groupId);
         model.addAttribute("services", services);
         return "services";

@@ -4,6 +4,7 @@ import com.mcsumdu.hritsay.specialty.models.Educator;
 import com.mcsumdu.hritsay.specialty.models.Group;
 import com.mcsumdu.hritsay.specialty.models.News;
 import com.mcsumdu.hritsay.specialty.models.Student;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
@@ -13,6 +14,8 @@ import java.util.List;
 
 @Component
 public class StudentsPostgresDAO extends PostgresDAOConnection {
+    @Autowired
+    private GroupPostgresDAO groupPostgresDAO;
 
     public List<Student> getAllStudentsByGroup(Group group) {
         List<Student> students = new ArrayList<>();
@@ -34,7 +37,7 @@ public class StudentsPostgresDAO extends PostgresDAOConnection {
         }
         for(Student student : students) {
             int groupTmp = student.getGroup().getId();
-            student.setGroup(getGroupById(groupTmp));
+            student.setGroup(groupPostgresDAO.getGroupById(groupTmp));
         }
 
         return students;
@@ -62,79 +65,6 @@ public class StudentsPostgresDAO extends PostgresDAOConnection {
         return student;
     }
 
-    public List<Group> getAllGroups() {
-        connect();
-        List<Group> groups = new ArrayList<>();
-        try {
-            statement = connection.prepareStatement("select * from groups");
-            resultSet = statement.executeQuery();
-            while(resultSet.next()) {
-               groups.add(parseGroup(resultSet));
-            }
-        } catch (SQLException e) {
-            /*
-             * LOGS
-             */
-
-        } finally {
-            disconnect();
-        }
-        return groups;
-    }
-
-    public Group getGroupById(int id) {
-        connect();
-        Group group = new Group();
-        try {
-
-            statement = connection.prepareStatement("select *  from groups  where group_id = ?");
-            statement.setInt(1, id);
-            ResultSet tmpResultSet = statement.executeQuery();
-            while(tmpResultSet.next()) {
-                group = parseGroup(tmpResultSet);
-            }
-        } catch (SQLException e) {
-            /*
-             * LOGS
-             */
-        } finally {
-            disconnect();
-        }
-        return group;
-    }
-
-    public Group getGroupByTitle(String title) {
-        connect();
-        Group group = new Group();
-        try {
-
-            statement = connection.prepareStatement("select *  from groups  where title like ?");
-            statement.setString(1, title);
-            ResultSet tmpResultSet = statement.executeQuery();
-            while(tmpResultSet.next()) {
-                group = parseGroup(tmpResultSet);
-            }
-        } catch (SQLException e) {
-            /*
-             * LOGS
-             */
-        } finally {
-            disconnect();
-        }
-        return group;
-    }
-
-    public Group parseGroup(ResultSet resultSet) {
-        Group group = null;
-        try {
-            int id = resultSet.getInt("GROUP_ID");
-            String title = resultSet.getString("TITLE");
-            group = new Group(id, title);
-        } catch (SQLException e) {
-            /*LOGS*/
-        }
-        return group;
-    }
 
 
 }

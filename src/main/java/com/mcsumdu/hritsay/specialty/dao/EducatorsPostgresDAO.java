@@ -47,7 +47,8 @@ public class EducatorsPostgresDAO extends PostgresDAOConnection {
     }
 
 
-    public void addEducator(Educator educator) {
+    public void addEducator(String name, String surname, String patronymic, String description,
+                            int imgUrlId, int mgrId, int roleId) {
         connect();
         try {
             statement = connection.prepareStatement(
@@ -55,13 +56,13 @@ public class EducatorsPostgresDAO extends PostgresDAOConnection {
                         "VALUES (?, ?, ?, ?, ?, ?, ?)"
             );
 
-            statement.setString(1, educator.getName());
-            statement.setString(2, educator.getSurname());
-            statement.setString(3, educator.getPatronymic());
-            statement.setString(4, educator.getDescription());
-            statement.setInt(5, educator.getUrlToImage().getUrlId());
-            statement.setInt(6, educator.getManager().getEducatorId());
-            statement.setInt(7, educator.getRole().getRoleId());
+            statement.setString(1, name);
+            statement.setString(2, surname);
+            statement.setString(3, patronymic);
+            statement.setString(4, description);
+            statement.setInt(5, imgUrlId);
+            statement.setInt(6, mgrId);
+            statement.setInt(7, roleId);
 
 
             statement.execute();
@@ -87,9 +88,6 @@ public class EducatorsPostgresDAO extends PostgresDAOConnection {
         }
     }
 
-    public void updateEducator(int id) {
-
-    }
 
 
     private Educator parseEducator(ResultSet resultSet) {

@@ -64,7 +64,7 @@ public class TeachersAdminController {
 
        Educator educator = new Educator(name, surname, patronymic, description, urlAddress, managerObj, roleObj);
 
-        educatorsPostgresDAO.addEducator(educator);
+        educatorsPostgresDAO.addEducator(name, surname, patronymic, description, urlId, managerObj.getEducatorId(), roleObj.getRoleId());
 
         System.out.println(name + "\t" + surname + "\t" + patronymic + "\t" + role + "\t" + description + "\t" + imgUrl + "\t mgr_id: " + manager);
 

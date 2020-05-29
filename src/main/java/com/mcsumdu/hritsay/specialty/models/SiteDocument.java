@@ -5,15 +5,15 @@ public class SiteDocument {
     private int docId;
     private String title;
     private String description;
-    private int urlDocId;
+    private UrlAddress urlDoc;
 
     public SiteDocument() {}
 
-    public SiteDocument(int docId, String title, String description, int urlDocId) {
+    public SiteDocument(int docId, String title, String description, UrlAddress urlDoc) {
         this.docId = docId;
         this.title = title;
         this.description = description;
-        this.urlDocId = urlDocId;
+        this.urlDoc = urlDoc;
     }
 
     public int getDocId() {
@@ -40,12 +40,12 @@ public class SiteDocument {
         this.description = description;
     }
 
-    public int getUrlDocId() {
-        return urlDocId;
+    public UrlAddress getUrlDoc() {
+        return urlDoc;
     }
 
-    public void setUrlDocId(int urlDocId) {
-        this.urlDocId = urlDocId;
+    public void setUrlDoc(UrlAddress urlDoc) {
+        this.urlDoc = urlDoc;
     }
 
     @Override
@@ -54,7 +54,7 @@ public class SiteDocument {
                 "docId=" + docId +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", urlDocId=" + urlDocId +
+                ", urlDocId=" + urlDoc +
                 '}';
     }
 }

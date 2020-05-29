@@ -64,12 +64,12 @@ a:hover {
 
 }
 
-.card {
-    margin: 2px;
-}
-
 .card-service {
     margin: 15px;
+}
+
+.doc-card {
+    margin-bottom: 20px;
 }
 
 img .news-picture {

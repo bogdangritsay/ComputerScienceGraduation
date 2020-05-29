@@ -24,6 +24,8 @@ public class MainController {
     private EducationServicesPostgresDAO educationServicesPostgresDAO;
     @Autowired
     private GroupPostgresDAO groupPostgresDAO;
+    @Autowired
+    private EducDocumentsPostgresDAO educDocumentsPostgresDAO;
 
     @GetMapping("/")
     public String home(Model model) {
@@ -74,6 +76,13 @@ public class MainController {
         List<EducationService> services = educationServicesPostgresDAO.getServicesByGroupId(groupId);
         model.addAttribute("services", services);
         return "services";
+    }
+
+    @GetMapping("/methodicals")
+    public String showAllMethodicals(Model model) {
+        List<SiteDocument> documents = educDocumentsPostgresDAO.getAllMethodicalDocuments();
+        model.addAttribute("documents", documents);
+        return "methodicals";
     }
 
 }

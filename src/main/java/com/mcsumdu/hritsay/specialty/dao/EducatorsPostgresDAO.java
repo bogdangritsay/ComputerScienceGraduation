@@ -47,8 +47,10 @@ public class EducatorsPostgresDAO extends PostgresDAOConnection {
     }
 
 
+
+
     public void addEducator(String name, String surname, String patronymic, String description,
-                            int imgUrlId, int mgrId, int roleId) {
+                            int imgUrlId, int mgrId, int roleId, List<Integer> subjectList) {
         connect();
         try {
             statement = connection.prepareStatement(
@@ -63,9 +65,47 @@ public class EducatorsPostgresDAO extends PostgresDAOConnection {
             statement.setInt(5, imgUrlId);
             statement.setInt(6, mgrId);
             statement.setInt(7, roleId);
-
-
             statement.execute();
+
+            int educatorId = 0;
+            //Adding relations for educator and subjects
+
+            //Search educator by input data
+            statement = connection.prepareStatement(
+                    "SELECT ID_EDUCATOR FROM EDUCATORS WHERE " +
+                            "NAME LIKE ? AND " +
+                            "SURNAME LIKE ? AND " +
+                            "PATRONYMIC LIKE ? AND " +
+                            "EDUC_DESC LIKE ? AND " +
+                            "IMG_URL_ID = ? AND  " +
+                            "MGR_ID = ? AND  " +
+                            "ROLE_ID  = ? "
+            );
+
+            statement.setString(1, name);
+            statement.setString(2, surname);
+            statement.setString(3, patronymic);
+            statement.setString(4, description);
+            statement.setInt(5, imgUrlId);
+            statement.setInt(6, mgrId);
+            statement.setInt(7, roleId);
+            resultSet = statement.executeQuery();
+            while(resultSet.next()) {
+               educatorId=  resultSet.getInt("ID_EDUCATOR");
+            }
+
+
+            for (int subjectId : subjectList) {
+                statement = connection.prepareStatement(
+                        "INSERT INTO EDUCATORS_SUBJECT (EDUCATORS_ID_EDUCATOR, SUBJECTS_SUBJECT_ID)" +
+                            "VALUES(?,?)"
+                );
+                statement.setInt(1, educatorId);
+                statement.setInt(2, subjectId);
+                statement.execute();
+
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -89,7 +129,7 @@ public class EducatorsPostgresDAO extends PostgresDAOConnection {
     }
 
 
-
+        //??????????????????????????????????
     private Educator parseEducator(ResultSet resultSet) {
         Educator educator = new Educator();
         try {

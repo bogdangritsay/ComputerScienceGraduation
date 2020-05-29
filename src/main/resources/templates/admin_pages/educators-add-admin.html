@@ -38,6 +38,10 @@
                     </select><br>
                     <input type="text"  name="description" placeholder="Короткий опис викладача..." class="form-control" maxlength="249"><br>
                     <input type="text"  name="imgUrl" placeholder="Посилання на фото викладача..." class="form-control"><br>
+                    <p> Предмети що викладає (щоб обрати декілька предметів, необхідно зажати ctrl і натиснути на назву в випадаючому списку): </p>
+                    <select class="form-control" name="subjectList" multiple>
+                        <option th:each="el : ${subjects}"  th:value="${el.getSubjectId()}" th:text="${el.getTitle()}"></option>
+                    </select><br>
                     <button type="submit" class="btn btn-success">Внести зміни</button>
                 </form>
             </div>

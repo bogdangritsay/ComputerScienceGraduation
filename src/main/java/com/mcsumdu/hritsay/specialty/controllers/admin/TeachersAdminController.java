@@ -3,11 +3,9 @@ package com.mcsumdu.hritsay.specialty.controllers.admin;
 
 import com.mcsumdu.hritsay.specialty.dao.EducatorsPostgresDAO;
 import com.mcsumdu.hritsay.specialty.dao.NewsPostgresDAO;
+import com.mcsumdu.hritsay.specialty.dao.SubjectsPostgresDAO;
 import com.mcsumdu.hritsay.specialty.dao.UrlsPostgresDAO;
-import com.mcsumdu.hritsay.specialty.models.Educator;
-import com.mcsumdu.hritsay.specialty.models.News;
-import com.mcsumdu.hritsay.specialty.models.Role;
-import com.mcsumdu.hritsay.specialty.models.UrlAddress;
+import com.mcsumdu.hritsay.specialty.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +24,8 @@ public class TeachersAdminController {
     private EducatorsPostgresDAO educatorsPostgresDAO;
     @Autowired
     private  UrlsPostgresDAO urlsPostgresDAO;
+    @Autowired
+    private SubjectsPostgresDAO subjectsPostgresDAO;
 
 
     @GetMapping("/educators-admin")
@@ -42,6 +42,8 @@ public class TeachersAdminController {
         List<Educator> educators = educatorsPostgresDAO.getAllEducators();
         model.addAttribute("roles", roles);
         model.addAttribute("educators", educators);
+        List<Subject> subjects = subjectsPostgresDAO.getAllSubjects();
+        model.addAttribute("subjects", subjects);
         return "admin_pages/educators-add-admin";
     }
 
@@ -54,8 +56,8 @@ public class TeachersAdminController {
                                @RequestParam String description,
                                @RequestParam String imgUrl,
                                @RequestParam int manager,
+                               @RequestParam List<Integer> subjectList,
                                Model model) {
-
        urlsPostgresDAO.addNewUrl(imgUrl, "img");
        int urlId = urlsPostgresDAO.getUrlIdByString(imgUrl);
        UrlAddress urlAddress = urlsPostgresDAO.getUrlById(urlId);
@@ -64,7 +66,7 @@ public class TeachersAdminController {
 
        Educator educator = new Educator(name, surname, patronymic, description, urlAddress, managerObj, roleObj);
 
-        educatorsPostgresDAO.addEducator(name, surname, patronymic, description, urlId, managerObj.getEducatorId(), roleObj.getRoleId());
+        educatorsPostgresDAO.addEducator(name, surname, patronymic, description, urlId, managerObj.getEducatorId(), roleObj.getRoleId(), subjectList);
 
         System.out.println(name + "\t" + surname + "\t" + patronymic + "\t" + role + "\t" + description + "\t" + imgUrl + "\t mgr_id: " + manager);
 

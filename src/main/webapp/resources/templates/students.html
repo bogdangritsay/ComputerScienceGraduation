@@ -3,8 +3,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" th:href="@{/styles/style.css}">
-    <title>Сайт спеціальності 122 «Комп`ютерні науки» МК СумДУ</title>
+    <link rel="stylesheet" th:href="@{/static/styles/style.css}">
+    <title>Сайт спеціальності 122 «Компютерні науки» МК СумДУ</title>
 
 </head>
 <body>
@@ -20,34 +20,45 @@
 
     <div class="container">
         <div class="container mt-5">
-            <h1>Сервіси дистанційного навчання</h1>
+            <h1>Студенти спеціальності</h1>
             <hr>
             <div class="margin-3"></div>
             <div class="container">
                 <form action="" method="post">
-                    <select class="form-control" name="groupTitle" >
-                        <option>Оберіть групу, для якої необхідно переглянути сервіси</option>
+                    <select class="form-control" name="groupTitle">
+                        <option>Оберіть групу</option>
                         <option th:each="el : ${groups}" th:text="${el.getTitle()}">410-i</option>
                     </select>
+
                     <button class="btn btn-primary" type="submit">Переглянути</button>
+
                 </form>
-                <div class="margin-3"></div>
-                <hr>
-                <div class="margin-3"></div>
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">№</th>
+                        <th scope="col">Прізвище</th>
+                        <th scope="col">Ім'я</th>
+                        <th scope="col">По батькові</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="el, iterator : ${students}">
+                        <th scope="row" th:text="${iterator.index+1}">Number</th>
+                        <td th:text="${el.getName()}">Name</td>
+                        <td th:text="${el.getSurname()}">Surname</td>
+                        <td th:text="${el.getPatronymic()}">Patronymic</td>
+                    </tr>
+                    </tbody>
+                </table>
 
 
 
-                <div class="row">
-                    <div th:each="el : ${services}" class="card card-service" style="width: 18rem;">
-                        <div class="card-body">
-                            <h5 th:text="${el.getSubject().getTitle()}" class="card-title">Об'єктно-орієнтоване програмування</h5>
-                            <h6 th:text="${el.getEducator().getSurname()} + '  ' +  ${el.getEducator().getName()} + '  ' + ${el.getEducator().getPatronymic()}"class="card-subtitle mb-2 text-muted">Ольга Дорошкова</h6>
-                            <p th:text="${el.getDescription()}" class="card-text">Тут буде розміщено опис даного ресурсу для предмету об'єктно орієнтоване програмування</p>
-                            <a th:href="${el.getServiceUrl().getUrl()}"  class="card-link">Посилання на ресурс</a>
-                        </div>
-                    </div>
-                </div>
+
+
             </div>
+
 
         </div>
         <div class="clear"></div>

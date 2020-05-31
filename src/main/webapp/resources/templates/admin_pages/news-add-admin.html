@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" th:href="@{/styles/style.css}">
+    <link rel="stylesheet" th:href="@{/static/styles/style.css}">
     <title>Сайт спеціальності 122 «Компютерні науки» МК СумДУ</title>
 
 </head>
@@ -19,22 +19,16 @@
 <div class="wrapper">
     <div class="container">
         <div class="container mt-5 mb-5">
-            <h1>Додавання викладачів</h1><br>
+            <h1>Додавання новин</h1>
+            <hr>
+            <div class="margin-3"></div>
             <div>
                 <form method="post">
-                    <input type="text"  name="surname" placeholder="Прізвище..." class="form-control"><br>
-                    <input type="text" name="name" placeholder="Ім'я..." class="form-control"><br>
-                    <input type="text" name="patronymic" placeholder="По батькові..." class="form-control"><br>
-                    <p> Посада: </p>
-                    <select class="form-control" name="role">
-                        <option th:each="el : ${roles}" th:value="${el.getRoleId()}" th:text="${el.getTitle()}"></option>
-                    </select><br>
-                    <p> Кому підпорядковується: </p>
-                    <select class="form-control" name="manager">
-                        <option th:each="el : ${educators}"  th:value="${el.getEducatorId()}" th:text="${el.surname} + '  ' +  ${el.name} + '  ' + ${el.patronymic}"></option>
-                    </select><br>
-                    <input type="text"  name="description" placeholder="Короткий опис викладача..." class="form-control" maxlength="249"><br>
-                    <input type="text"  name="imgUrl" placeholder="Посилання на фото викладача..." class="form-control"><br>
+                    <input type="text" name="title" placeholder="Заголовок новини..." class="form-control"><br>
+                    <input type="text"  name="description" placeholder="Короткий опис..." class="form-control" maxlength="249"><br>
+                    <input type="text"  name="imgUrl" placeholder="Посилання на зображення..." class="form-control"><br>
+                    <input type="date"  name="date" placeholder="Дата..." class="form-control"><br>
+                    <textarea  name="text" placeholder="Текст новини..." class="form-control" height="40%"></textarea><br>
                     <button type="submit" class="btn btn-success">Внести зміни</button>
                 </form>
             </div>

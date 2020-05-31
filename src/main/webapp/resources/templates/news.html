@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" th:href="@{/styles/style.css}">
+    <link rel="stylesheet" th:href="@{/static/styles/style.css}">
     <title>Сайт спеціальності 122 «Компютерні науки» МК СумДУ</title>
 
 </head>
@@ -17,23 +17,23 @@
 <div class="margin-3"></div>
 
 <div class="wrapper">
+
     <div class="container">
-        <div class="container mt-5 mb-5">
-            <h1>Додавання новин</h1>
+        <div class="container mt-5">
+            <h1>Новини спеціальності</h1>
+            
             <hr>
             <div class="margin-3"></div>
-            <div>
-                <form method="post">
-                    <input type="text" name="title" placeholder="Заголовок новини..." class="form-control"><br>
-                    <input type="text"  name="description" placeholder="Короткий опис..." class="form-control" maxlength="249"><br>
-                    <input type="text"  name="imgUrl" placeholder="Посилання на зображення..." class="form-control"><br>
-                    <input type="date"  name="date" placeholder="Дата..." class="form-control"><br>
-                    <textarea  name="text" placeholder="Текст новини..." class="form-control" height="40%"></textarea><br>
-                    <button type="submit" class="btn btn-success">Внести зміни</button>
-                </form>
+            <div th:each="el : ${news}" class="alert alert-info mt-2">
+                <h3 th:text="${el.title}"></h3>
+                <!--<img th:src="${el.urlToImage}" class="news-picture" >-->
+                <p th:text="${el.description}"></p>
+                <a th:href="'/news/' + ${el.id}" class="btn btn-info">Детальніше... </a>
             </div>
+
+
         </div>
-        <div class="clear"></div>
+    <div class="clear"></div>
     </div>
 </div>
 

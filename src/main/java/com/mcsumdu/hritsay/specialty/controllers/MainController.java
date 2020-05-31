@@ -84,5 +84,4 @@ public class MainController {
         model.addAttribute("documents", documents);
         return "methodicals";
     }
-
 }

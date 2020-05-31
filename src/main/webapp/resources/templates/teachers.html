@@ -2,8 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" th:href="@{/static/styles/style.css}">
+    <div th:replace="blocks/header :: header-css"/>
     <title>Сайт спеціальності 122 «Комп`ютерні науки» МК СумДУ</title>
 
 </head>
@@ -11,8 +10,7 @@
 
 
 <!--Navbar-->
-<header th:insert="blocks/header::header"></header>
-
+<div th:replace="blocks/header :: header"> </div>
 
 <div class="margin-3"></div>
 

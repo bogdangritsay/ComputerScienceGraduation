@@ -15,6 +15,8 @@ import java.util.List;
 public class EducatorsPostgresDAO extends PostgresDAOConnection {
     @Autowired
     private UrlsPostgresDAO urlsPostgresDAO;
+    @Autowired
+    private RolesPostgresDAO rolesPostgresDAO;
 
 
     public List<Educator> getAllEducators() {
@@ -38,7 +40,7 @@ public class EducatorsPostgresDAO extends PostgresDAOConnection {
 
         for(Educator educator : educators) {
             educator.setManager(getEducatorById(educator.getManager().getEducatorId()));
-            educator.setRole(getRoleById(educator.getRole().getRoleId()));
+            educator.setRole(rolesPostgresDAO.getRoleById(educator.getRole().getRoleId()));
             UrlAddress urlAddress = urlsPostgresDAO.getUrlById(educator.getUrlToImage().getUrlId());
             educator.setUrlToImage(urlAddress);
         }
@@ -186,55 +188,4 @@ public class EducatorsPostgresDAO extends PostgresDAOConnection {
 
         return educator;
     }
-
-    /* Work with entity "Roles" */
-    public Role getRoleById(int id) {
-        connect();
-        Role role = new Role();
-        try {
-            statement = connection.prepareStatement("select *  from roles  where role_id = ?");
-            statement.setInt(1, id);
-            ResultSet tmpResultSet = statement.executeQuery();
-            while(tmpResultSet.next()) {
-                int roleId = tmpResultSet.getInt("ROLE_ID");
-                String title = tmpResultSet.getString("TITLE");
-                int rank = tmpResultSet.getInt("RANK");
-                role = new Role(roleId, title, rank);
-            }
-        } catch (SQLException e) {
-            /*
-             * LOGS
-             */
-        } finally {
-            disconnect();
-        }
-        return role;
-    }
-
-    public List<Role> getAllRoles() {
-        connect();
-        List<Role> roles = new ArrayList<>();
-        try {
-            statement = connection.prepareStatement("select *  from roles ");
-            ResultSet tmpResultSet = statement.executeQuery();
-            while(tmpResultSet.next()) {
-                int roleId = tmpResultSet.getInt("ROLE_ID");
-                String title = tmpResultSet.getString("TITLE");
-                int rank = tmpResultSet.getInt("RANK");
-                Role role = new Role(roleId, title, rank);
-                roles.add(role);
-            }
-        } catch (SQLException e) {
-            /*
-             * LOGS
-             */
-        } finally {
-            disconnect();
-        }
-        return roles;
-    }
-
-
-
-
 }

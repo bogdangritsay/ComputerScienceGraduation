@@ -1,10 +1,7 @@
 package com.mcsumdu.hritsay.specialty.controllers.admin;
 
 
-import com.mcsumdu.hritsay.specialty.dao.EducatorsPostgresDAO;
-import com.mcsumdu.hritsay.specialty.dao.NewsPostgresDAO;
-import com.mcsumdu.hritsay.specialty.dao.SubjectsPostgresDAO;
-import com.mcsumdu.hritsay.specialty.dao.UrlsPostgresDAO;
+import com.mcsumdu.hritsay.specialty.dao.*;
 import com.mcsumdu.hritsay.specialty.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +23,8 @@ public class TeachersAdminController {
     private  UrlsPostgresDAO urlsPostgresDAO;
     @Autowired
     private SubjectsPostgresDAO subjectsPostgresDAO;
-
+    @Autowired
+    private RolesPostgresDAO rolesPostgresDAO;
 
     @GetMapping("/educators-admin")
     public String educatorsAdminMain(Model model) {
@@ -38,7 +36,7 @@ public class TeachersAdminController {
 
     @GetMapping("/educators-admin/add")
     public String educatorAdd(Model model) {
-        List<Role> roles = educatorsPostgresDAO.getAllRoles();
+        List<Role> roles = rolesPostgresDAO.getAllRoles();
         List<Educator> educators = educatorsPostgresDAO.getAllEducators();
         model.addAttribute("roles", roles);
         model.addAttribute("educators", educators);
@@ -61,7 +59,7 @@ public class TeachersAdminController {
        urlsPostgresDAO.addNewUrl(imgUrl, "img");
        int urlId = urlsPostgresDAO.getUrlIdByString(imgUrl);
        UrlAddress urlAddress = urlsPostgresDAO.getUrlById(urlId);
-       Role roleObj = educatorsPostgresDAO.getRoleById(role);
+       Role roleObj = rolesPostgresDAO.getRoleById(role);
        Educator managerObj = educatorsPostgresDAO.getEducatorById(manager);
 
        Educator educator = new Educator(name, surname, patronymic, description, urlAddress, managerObj, roleObj);

@@ -1,5 +1,5 @@
 package com.mcsumdu.hritsay.specialty.entity;
-
+/*
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -97,3 +97,4 @@ public class User implements UserDetails {
 
 
 }
+*/

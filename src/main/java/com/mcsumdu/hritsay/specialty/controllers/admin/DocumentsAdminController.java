@@ -53,7 +53,7 @@ public class DocumentsAdminController {
 
 
     @PostMapping("/methodicals-admin/{id}/remove")
-    public String educatorDelete(@PathVariable(value = "id") int id, Model model) {
+    public String methodicalsDelete(@PathVariable(value = "id") int id, Model model) {
         educDocumentsPostgresDAO.removeDocument(id);
         return "redirect:/methodicals-admin";
     }

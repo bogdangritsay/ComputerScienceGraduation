@@ -2,8 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" th:href="@{/static/styles/style.css}">
+    <div th:replace="blocks/header :: header-css"/>
     <title>Сайт спеціальності 122 «Комп`ютерні науки» МК СумДУ</title>
 
 </head>
@@ -13,33 +12,36 @@
 <!--Navbar-->
 <header th:insert="blocks/header::header"></header>
 
+
 <div class="margin-3"></div>
 
 <div class="wrapper">
-
+    <header th:insert="blocks/admin_menu::admin_header"></header>
     <div class="container">
         <div class="container mt-5">
-            <h1>Панель адміністратора</h1>
+            <h1>Управління ролями викладачів спеціальності</h1>
             <hr>
             <div class="margin-3"></div>
-
-            <header th:insert="blocks/admin_menu::admin_header"></header>
-                <div class="card-body">
-                    <h5 class="card-title">Оберіть розділ</h5>
-                    <p class="card-text">Оберіть потрібний вам розділ вгорі, для продовження роботи.</p>
-
+            <a th:href="'/roles-admin/add'" class="btn btn-success">Додати нову роль</a>
+            <div class="margin-3"></div>
+            <div class="container">
+                <div class="card">
+                    <div th:each="el : ${roles}" class="card-body">
+                        <h5 th:text="'Посада: ' + ${el.getTitle()}" class="card-title">Назва ролі</h5>
+                        <p th:text="'Ранк даної ролі: ' + ${el.getRank()}" class="card-text">Ранк ролі</p>
+                        <form th:action="'/roles-admin/' + ${el.getRoleId()} + '/remove'" method="post">
+                            <button class="btn btn-danger" type="submit">Видалити</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="clear"></div>
     </div>
+    <div class="clear"></div>
+</div>
 </div>
 
-
-
 <div th:insert="blocks/footer :: footer"></div>
-
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

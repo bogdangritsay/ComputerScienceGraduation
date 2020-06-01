@@ -84,4 +84,10 @@ public class MainController {
         model.addAttribute("documents", documents);
         return "methodicals";
     }
+
+    @GetMapping("/abiturientam")
+    public String abiturientam() { return "abiturientam"; }
+
+    @GetMapping("/contacts")
+    public String contacts() { return "contacts";}
 }

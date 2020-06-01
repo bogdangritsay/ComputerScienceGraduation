@@ -1,4 +1,4 @@
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
 <head>
     <div th:fragment="header-css">
         <!-- this is header-css -->
@@ -37,24 +37,20 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Абітурієнтам</a>
+                <a class="nav-link" href="/abiturientam">Абітурієнтам</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Опитування</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Контакти</a>
+                <a class="nav-link" href="/contacts">Контакти</a>
             </li>
         </ul>
 
-        <div sec:authorize access="!isAuthenticated()">
-            <a class="btn btn-outline-primary" href="/login">Увійти</a>
-        </div>
-
-<!--        <div sec:authorize access="isAuthenticated()">
+        <sec:authorize access="!isAuthenticated()">
+          <a class="btn btn-outline-primary" href="/admin">Увійти</a>
+        </sec:authorize>
+        <!--<sec:authorize access="isAuthenticated()">
             <a class="btn btn-outline-primary" href="/admin">Особистий кабінет</a>
             <a class="btn btn-outline-primary" href="/logout">Вийти</a>
-        </div>-->
+        </sec:authorize>-->
     </div>
 </div>
 

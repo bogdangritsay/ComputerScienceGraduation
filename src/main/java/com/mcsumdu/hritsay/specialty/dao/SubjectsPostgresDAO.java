@@ -31,6 +31,35 @@ public class SubjectsPostgresDAO extends PostgresDAOConnection {
         return subjects;
     }
 
+    public void addSubject(String title) {
+        connect();
+        try {
+            statement = connection.prepareStatement(
+                    "INSERT INTO SUBJECTS(TITLE)" +
+                            "VALUES (?)"
+            );
+            statement.setString(1, title);
+            statement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            disconnect();
+        }
+    }
+
+    public void deleteSubject(int id) {
+        connect();
+        try {
+            statement = connection.prepareStatement("DELETE FROM SUBJECTS WHERE SUBJECT_ID = ?");
+            statement.setInt(1, id);
+            statement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            disconnect();
+        }
+    }
+
     private Subject parseSubject(ResultSet resultSet) {
         Subject subject = null;
         try {

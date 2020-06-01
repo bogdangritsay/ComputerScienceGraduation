@@ -1,5 +1,5 @@
 package com.mcsumdu.hritsay.specialty.entity;
-
+/*
 
 import org.springframework.security.core.GrantedAuthority;
 
@@ -57,3 +57,4 @@ public class SecRole implements GrantedAuthority {
         return getName();
     }
 }
+*/

@@ -1,7 +1,7 @@
 package com.mcsumdu.hritsay.specialty.controllers.admin;
 
 
-import com.mcsumdu.hritsay.specialty.services.UserService;
+//import com.mcsumdu.hritsay.specialty.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class AdminController {
-    @Autowired
+  /*  @Autowired
     private UserService userService;
 
     @GetMapping("/admin")
@@ -35,5 +35,5 @@ public class AdminController {
     public String  gtUser(@PathVariable("userId") Long userId, Model model) {
         model.addAttribute("allUsers", userService.usergtList(userId));
         return "admin_pages/admin_home";
-    }
+    }*/
 }

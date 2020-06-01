@@ -36,11 +36,9 @@
     </a>
 </div>
 
-<div class="margin-3"></div>
-
 <div class="wrapper">
-
     <div class="container">
+        <div class="margin-3"></div>
         <a href="#"> <h2>Останні новини спеціальності</h2> </a>
         <hr>
         <div class="row">
@@ -61,7 +59,33 @@
         </div>
     </div>
 
-    <div class="clear"></div>
+
+    <div class="container-fluid" style="background-color: #102d42">
+        <div class="container text-center employers-block" >
+            <h1>Наші студенти працюють в таких компаніях:</h1>
+            <div class="margin-3"></div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <img th:src="@{/images/mindk.png}" class="employer-picture" >
+                </div>
+                <div class="col-lg-3">
+                    <img th:src="@{/images/netcracker.png}" class="employer-picture">
+                </div>
+                <div class="col-lg-3">
+                    <img th:src="@{/images/apptimized.png}" class="employer-picture">
+                </div>
+                <div class="col-lg-3">
+                    <img th:src="@{/images/portaone.jpg}" class="employer-picture">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="margin-3"></div>
+
+
+
+
+
 </div>
 
 <div th:insert="blocks/footer :: footer"></div>

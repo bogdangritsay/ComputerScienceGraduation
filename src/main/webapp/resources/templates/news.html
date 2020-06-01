@@ -22,15 +22,26 @@
             
             <hr>
             <div class="margin-3"></div>
-            <div th:each="el : ${news}" class="alert alert-info mt-2">
-                <h3 th:text="${el.title}"></h3>
-                <!--<img th:src="${el.urlToImage}" class="news-picture" >-->
-                <p th:text="${el.description}"></p>
-                <a th:href="'/news/' + ${el.id}" class="btn btn-info">Детальніше... </a>
+
+            <div th:each="el : ${news}" class="card mb-3">
+                <div class="row no-gutters" th:width="400">
+                    <div class="col-md-4">
+                        <img th:src="${el.getImgUrl()}" class="card-img" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 th:text="${el.title}" class="card-title"></h5>
+                            <p  th:text="${el.description}" class="card-text"></p>
+                            <a th:href="'/news/' + ${el.id}" class="btn btn-info">Детальніше... </a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
 
-        </div>
+
+
+    </div>
     <div class="clear"></div>
     </div>
 </div>

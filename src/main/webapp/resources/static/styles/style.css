@@ -77,6 +77,20 @@ img .news-picture {
     float: right;
 }
 
+.employer-picture {
+    width: 200px;
+    border-radius: 100px;
+    box-shadow: 2px 1px 3px #777;
+    -moz-box-shadow: 2px 1px 3px #777;
+    -webkit-box-shadow: 2px 1px 3px #777
+}
+
+.employers-block {
+    color: white;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
 
 footer {
     color: #666;

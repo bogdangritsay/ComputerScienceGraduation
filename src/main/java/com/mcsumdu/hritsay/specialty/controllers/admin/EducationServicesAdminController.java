@@ -19,8 +19,6 @@ public class EducationServicesAdminController {
     @Autowired
     private EducationServicesPostgresDAO educationServicesPostgresDAO;
     @Autowired
-    private StudentsPostgresDAO studentsPostgresDAO;
-    @Autowired
     private SubjectsPostgresDAO subjectsPostgresDAO;
     @Autowired
     private GroupPostgresDAO groupPostgresDAO;

@@ -17,13 +17,6 @@ import java.util.List;
 
 @Controller
 public class DocumentsAdminController {
-
-    @Autowired
-    private EducatorsPostgresDAO educatorsPostgresDAO;
-    @Autowired
-    private UrlsPostgresDAO urlsPostgresDAO;
-    @Autowired
-    private SubjectsPostgresDAO subjectsPostgresDAO;
     @Autowired
     private EducDocumentsPostgresDAO educDocumentsPostgresDAO;
 
@@ -34,7 +27,6 @@ public class DocumentsAdminController {
         model.addAttribute("documents", documents);
         return "admin_pages/methodicals-admin";
     }
-
 
     @GetMapping("/methodicals-admin/add")
     public String methodicalsAdd() {

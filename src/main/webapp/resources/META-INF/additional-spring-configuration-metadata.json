@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "user.datasource.key",
+      "type": "java.lang.String",
+      "description": "Description for user.datasource.key."
+  }
+] }

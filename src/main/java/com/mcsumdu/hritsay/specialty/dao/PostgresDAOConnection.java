@@ -17,7 +17,7 @@ public abstract class PostgresDAOConnection implements DAOConnection {
     private String login;
     @Value("${spring.datasource.password}")
     private String password;
-    @Value("${spring.datasource.driverClassName}")
+    @Value("${user.datasource.key}")
     private String driverName;
 
 

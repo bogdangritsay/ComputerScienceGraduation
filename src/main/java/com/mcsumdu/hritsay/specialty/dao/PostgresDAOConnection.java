@@ -11,12 +11,13 @@ public abstract class PostgresDAOConnection implements DAOConnection {
     protected  PreparedStatement statement;
     protected  ResultSet resultSet;
     protected Driver driver;
-   // @Value("${spring.datasource.url}")
+    @Value("${spring.datasource.url}")
     private String url = "jdbc:postgresql://localhost:5432/comp_science_db";
-   // @Value("${spring.datasource.username}")
+    @Value("${spring.datasource.username}")
     private String login ="postgres";
-   // @Value("${spring.datasource.password}")
+    @Value("${spring.datasource.password}")
     private String password = "356897-Bnm";
+    @Value("${spring.datasource.driverClassName}")
     private final String driverName = "org.postgresql.Driver";
 
 

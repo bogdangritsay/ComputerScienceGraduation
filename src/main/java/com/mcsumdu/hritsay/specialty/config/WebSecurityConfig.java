@@ -1,12 +1,12 @@
-/*
-package com.mcsumdu.hritsay.specialty.configs;
 
-//import com.mcsumdu.hritsay.specialty.services.UserService;
+package com.mcsumdu.hritsay.specialty.config;
+
+import com.mcsumdu.hritsay.specialty.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.onfig.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -32,15 +32,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/registration").not().fullyAuthenticated()
                 //Доступ только для пользователей с ролью Администратор
                 .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/teacher-panel/**").hasRole("USER")
                 //Доступ разрешен всем пользователей
-                .antMatchers("/", "/news/**", "/teachers", "/services", "/methodicals", "/students", "/abiturientam", "/contacts").permitAll()
+                .antMatchers("/", "/news/**", "/teachers", "/services", "/methodicals", "/students", "/abiturientam", "/contacts", "/images/**", "/styles/**").permitAll()
                 //Все остальные страницы требуют аутентификации
                 .anyRequest().authenticated()
                 .and()
                 //Настройка для входа в систему
                 .formLogin()
                 //Перенарпавление на главную страницу после успешного входа
-                .defaultSuccessUrl("/admin")
+                .defaultSuccessUrl("/")
                 .permitAll()
                 .and()
                 .logout()
@@ -53,4 +54,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder());
     }
 
-}*/
+}

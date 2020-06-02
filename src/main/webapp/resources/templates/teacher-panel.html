@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <div th:replace="blocks/header :: header-css"/>
+    <title>Сайт спеціальності 122 «Комп`ютерні науки» МК СумДУ</title>
+
+</head>
+<body>
+
+
+<!--Navbar-->
+<header th:insert="blocks/header::header"></header>
+
+
+<div class="margin-3"></div>
+
+<div class="wrapper">
+    <header th:insert="blocks/teacher_header::teacher_header"></header>
+    <div class="container">
+        <div class="container mt-5">
+            <h1>Методичні матеріали</h1>
+            <hr>
+            <div class="margin-3"></div>
+            <div class="container">
+                <h3>Оберіть потрібний розділ</h3>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+
+
+
+<div th:insert="blocks/footer :: footer"></div>
+
+</body>
+</html>
+
+
+
+

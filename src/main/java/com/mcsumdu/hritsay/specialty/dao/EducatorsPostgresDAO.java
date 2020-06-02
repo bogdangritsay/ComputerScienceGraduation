@@ -120,7 +120,7 @@ public class EducatorsPostgresDAO extends PostgresDAOConnection {
         try {
             statement = connection.prepareStatement("DELETE FROM EDUCATORS WHERE ID_EDUCATOR = ?");
             statement.setInt(1, id);
-            statement.executeQuery();
+            statement.execute();
         } catch (SQLException e) {
             /*
              * LOGS

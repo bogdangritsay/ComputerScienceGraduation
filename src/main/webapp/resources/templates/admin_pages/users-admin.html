@@ -25,14 +25,22 @@
             <a th:href="'/admin/registration'" class="btn btn-success">Додати новий обліковий запис</a>
             <div class="margin-3"></div>
             <div class="container">
-                <div class="card">
-                    <div th:each="el : ${subjects}" class="card-body">
-                        <h5 th:text="${el.getTitle()}" class="card-title">Назва предмету</h5>
-                        <form th:action="'/subjects-admin/' + ${el.getSubjectId()} + '/remove'" method="post">
-                            <button class="btn btn-danger" type="submit">Видалити</button>
-                        </form>
-                    </div>
-                </div>
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Roles</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="el : ${allUsers}">
+                            <td th:text="${el.getId()}"></td>
+                            <td th:text="${el.getUsername()}"></td>
+                            <td th:text="${el.getRoles()}"></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

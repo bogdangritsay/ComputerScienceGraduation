@@ -30,10 +30,7 @@ public class EducatorsPostgresDAO extends PostgresDAOConnection {
                 educators.add(educator);
             }
         } catch (SQLException e) {
-            /*
-             * LOGS
-             */
-
+            e.printStackTrace();
         } finally {
             disconnect();
         }
@@ -96,7 +93,6 @@ public class EducatorsPostgresDAO extends PostgresDAOConnection {
                educatorId=  resultSet.getInt("ID_EDUCATOR");
             }
 
-
             for (int subjectId : subjectList) {
                 statement = connection.prepareStatement(
                         "INSERT INTO EDUCATORS_SUBJECT (EDUCATORS_ID_EDUCATOR, SUBJECTS_SUBJECT_ID)" +
@@ -118,13 +114,14 @@ public class EducatorsPostgresDAO extends PostgresDAOConnection {
     public void deleteEducator(int id) {
         connect();
         try {
+            statement = connection.prepareStatement("DELETE FROM EDUCATORS_SUBJECT WHERE EDUCATORS_ID_EDUCATOR = ?");
+            statement.setInt(1, id);
+            statement.execute();
             statement = connection.prepareStatement("DELETE FROM EDUCATORS WHERE ID_EDUCATOR = ?");
             statement.setInt(1, id);
             statement.execute();
         } catch (SQLException e) {
-            /*
-             * LOGS
-             */
+            e.printStackTrace();
         } finally {
             disconnect();
         }
@@ -159,9 +156,7 @@ public class EducatorsPostgresDAO extends PostgresDAOConnection {
             educator.setRole(role);
 
         } catch (SQLException e) {
-            /*
-            LOGS
-             */
+           e.printStackTrace();
         }
 
         return educator;
@@ -179,9 +174,7 @@ public class EducatorsPostgresDAO extends PostgresDAOConnection {
                 educator = parseEducator(tmpResultSet);
             }
         } catch (SQLException e) {
-            /*
-             * LOGS
-             */
+            e.printStackTrace();
         } finally {
             disconnect();
         }

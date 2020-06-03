@@ -82,14 +82,16 @@ img .news-picture {
     border-radius: 100px;
     box-shadow: 2px 1px 3px #777;
     -moz-box-shadow: 2px 1px 3px #777;
-    -webkit-box-shadow: 2px 1px 3px #777
+    -webkit-box-shadow: 2px 1px 3px #777;
+    padding: 30px 10px;
 }
 
 .employers-block {
-    color: white;
+    color: #007bff;
     padding-top: 50px;
     padding-bottom: 50px;
 }
+
 
 
 footer {
@@ -101,6 +103,25 @@ footer {
 
 footer a {
     color: #999;
+}
+
+.navbar-toggler {
+    background-color: #007bff;    
+    margin: 20px;
+    color: white;
+    padding: 10px 15px;
+}
+
+@media (max-width: 767px) {
+    .nav-pills {
+        display: flex;
+        flex-direction: column;
+    }
+    .navbar {
+        display: flex;
+        flex-direction: column;
+    }
+    
 }
 
 

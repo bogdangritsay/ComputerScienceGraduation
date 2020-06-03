@@ -91,4 +91,9 @@ public class MainController {
     @GetMapping("/contacts")
     public String contacts() { return "contacts";}
 
+    @GetMapping("/virtualTour")
+    public String virtualTour() { return "ecs/corridor";}
+
+
+
 }

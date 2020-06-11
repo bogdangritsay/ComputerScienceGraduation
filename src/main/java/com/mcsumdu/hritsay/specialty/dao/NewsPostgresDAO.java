@@ -19,7 +19,8 @@ public class NewsPostgresDAO extends PostgresDAOConnection {
         connect();
         List<News> news = new ArrayList<>();
         try {
-            statement = connection.prepareStatement("select n.news_id, n.title, n.short_desc, n.news_text, n.news_date, u.url from site_news n, urls u where u.url_id = n.url_img_id");
+            statement = connection.prepareStatement("select n.news_id, n.title, n.short_desc, n.news_text, n.news_date, u.url " +
+                    "from site_news n, urls u where u.url_id = n.url_img_id");
             resultSet = statement.executeQuery();
             while(resultSet.next()) {
                 News tmpNews = parseNews(resultSet);
@@ -27,9 +28,7 @@ public class NewsPostgresDAO extends PostgresDAOConnection {
                 news.add(tmpNews);
             }
         } catch (SQLException e) {
-            /*
-            * LOGS
-             */
+            e.printStackTrace();
 
         } finally {
             disconnect();
@@ -146,9 +145,7 @@ public class NewsPostgresDAO extends PostgresDAOConnection {
             statement.setInt(6, id);
             resultSet = statement.executeQuery();
         } catch (SQLException e) {
-            /*
-             * LOGS
-             */
+           e.printStackTrace();
         } finally {
             disconnect();
         }
@@ -161,9 +158,7 @@ public class NewsPostgresDAO extends PostgresDAOConnection {
             statement.setInt(1, id);
             statement.executeQuery();
         } catch (SQLException e) {
-            /*
-             * LOGS
-             */
+          e.printStackTrace();
         } finally {
             disconnect();
         }

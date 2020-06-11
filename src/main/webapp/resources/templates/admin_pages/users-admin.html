@@ -19,7 +19,7 @@
     <header th:insert="blocks/admin_menu::admin_header"></header>
     <div class="container">
         <div class="container mt-5">
-            <h1>Управління предметами</h1>
+            <h1>Управління користувачами сайту</h1>
             <hr>
             <div class="margin-3"></div>
             <a th:href="'/admin/registration'" class="btn btn-success">Додати новий обліковий запис</a>
@@ -31,6 +31,7 @@
                         <th scope="col">ID</th>
                         <th scope="col">Username</th>
                         <th scope="col">Roles</th>
+                        <th>Delete</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -38,6 +39,13 @@
                             <td th:text="${el.getId()}"></td>
                             <td th:text="${el.getUsername()}"></td>
                             <td th:text="${el.getRoles()}"></td>
+                            <td>
+                                <form action="/users/delete" method="post">
+                                    <input type="hidden" name="userId" th:value="${el.getId()}"/>
+                                    <input type="hidden" name="action" value="delete"/>
+                                    <button>Видалити</button>
+                                </form>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

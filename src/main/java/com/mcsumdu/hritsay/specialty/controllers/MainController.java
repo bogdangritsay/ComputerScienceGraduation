@@ -93,7 +93,4 @@ public class MainController {
 
     @GetMapping("/virtualTour")
     public String virtualTour() { return "ecs/corridor";}
-
-
-
 }

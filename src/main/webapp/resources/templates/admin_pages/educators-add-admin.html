@@ -25,21 +25,21 @@
             <div class="margin-3"></div>
             <div>
                 <form method="post">
-                    <input type="text" name="surname" placeholder="Прізвище..." class="form-control"><br>
-                    <input type="text" name="name" placeholder="Ім'я..." class="form-control"><br>
-                    <input type="text" name="patronymic" placeholder="По батькові..." class="form-control"><br>
+                    <input type="text" name="surname" placeholder="Прізвище..." class="form-control" required><br>
+                    <input type="text" name="name" placeholder="Ім'я..." class="form-control" required><br>
+                    <input type="text" name="patronymic" placeholder="По батькові..." class="form-control" required><br>
                     <p> Посада: </p>
-                    <select class="form-control" name="role">
+                    <select class="form-control" name="role" required>
                         <option th:each="el : ${roles}" th:value="${el.getRoleId()}" th:text="${el.getTitle()}"></option>
                     </select><br>
                     <p> Кому підпорядковується: </p>
                     <select class="form-control" name="manager">
                         <option th:each="el : ${educators}"  th:value="${el.getEducatorId()}" th:text="${el.surname} + '  ' +  ${el.name} + '  ' + ${el.patronymic}"></option>
                     </select><br>
-                    <input type="text"  name="description" placeholder="Короткий опис викладача..." class="form-control" maxlength="249"><br>
-                    <input type="text"  name="imgUrl" placeholder="Посилання на фото викладача..." class="form-control"><br>
+                    <input type="text"  name="description" placeholder="Короткий опис викладача..." class="form-control" maxlength="249" required><br>
+                    <input type="text"  name="imgUrl" placeholder="Посилання на фото викладача..." class="form-control" required><br>
                     <p> Предмети що викладає (щоб обрати декілька предметів, необхідно зажати ctrl і натиснути на назву в випадаючому списку): </p>
-                    <select class="form-control" name="subjectList" multiple>
+                    <select class="form-control" name="subjectList" multiple required>
                         <option th:each="el : ${subjects}"  th:value="${el.getSubjectId()}" th:text="${el.getTitle()}"></option>
                     </select><br>
                     <button type="submit" class="btn btn-success">Внести зміни</button>

@@ -25,15 +25,15 @@ public class AdminController {
         return "admin_pages/admin_home";
     }
 
-    @PostMapping("/admin")
+    @PostMapping("/users/delete")
     public String  deleteUser(@RequestParam(required = true, defaultValue = "" ) Long userId,
                               @RequestParam(required = true, defaultValue = "" ) String action,
                               Model model) {
-        if (action.equals("delete")){
+        if (action.equals("delete")) {
             userService.deleteUser(userId);
         }
-        return "redirect:/admin";
-    }
+        return "redirect:/admin/users";
+}
 
     @GetMapping("/admin/users")
     public String usersAll(Model model) {
@@ -66,10 +66,4 @@ public class AdminController {
 
         return "redirect:/admin/users";
     }
-
-
-
-
-
-
 }
